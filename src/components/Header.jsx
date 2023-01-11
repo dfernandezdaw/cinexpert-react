@@ -1,46 +1,47 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import logo from '../assets/img/logo.png'
 
 const Header = () => {
   return (
     <header>
       <nav className='navBar'>
-        <a href='index.html'>
+        <Link to='/'>
           <img src={logo} alt='logo' />
-        </a>
+        </Link>
         <a className='icon'>&#9776;</a>
         <div className='container-links'>
-          <a href='index.html'>Movies</a>
-          <a href='tvshows.html'>TV Shows</a>
+          <Link to='/'>Movies</Link>
+          <Link to='/tvshows'>TV Shows</Link>
         </div>
         <div className='container-login'>
-          <a id='dark-select' href='login.html'>
+          <Link id='dark-select' to='/login'>
             Log in
-          </a>
-          <a id='dark-select-2' href='signup.html'>
+          </Link>
+          <Link id='dark-select-2' to='/signup'>
             Sign up
-          </a>
+          </Link>
         </div>
         <ul>
           <li>
-            <a className='nav-link' href='index.html'>
+            <Link className='nav-link' to='/'>
               Movies
-            </a>
+            </Link>
           </li>
           <li>
-            <a className='nav-link' href='tvshows.html'>
+            <Link className='nav-link' to='/tvshows'>
               TV Shows
-            </a>
+            </Link>
           </li>
           <li>
-            <a className='nav-link' href='login.html'>
+            <Link className='nav-link' to='/login'>
               Log in
-            </a>
+            </Link>
           </li>
           <li>
-            <a className='nav-link' href='signup.html'>
+            <Link className='nav-link' to='/signup'>
               Sign up
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
