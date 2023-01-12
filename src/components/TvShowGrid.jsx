@@ -5,16 +5,16 @@ import axios from 'axios'
 import { api_key, BASE_URL } from '../api'
 
 const TvShowGrid = () => {
-  // Define state for movies
+  // Define state for tvshows
   const [tvshows, setTvShows] = useState([])
 
   // Create an instance of axios with the base URL
   const api = axios.create({ baseURL: BASE_URL })
 
-  // Define a function to get the popular movies from the API using axios and the endpoint /movie/popular
+  // Define a function to get the popular tvshows from the API using axios and the endpoint /tv/popular
   const getTvShows = api.get('/tv/popular', { params: { api_key } })
 
-  // Call the function to get the popular movies and set the state with the response
+  // Call the function to get the popular tvshows and set the state with the response
   useEffect(() => {
     getTvShows
       // Axios return an object response and our json is in data property
@@ -26,7 +26,7 @@ const TvShowGrid = () => {
     <div>
       <h1>TV Shows</h1>
       <div className='container-film'>
-        {/* Map over the movies array and render a MovieCard component for each movie */}
+        {/* Map over the tvshows array and render a TvShowCard component for each movie */}
         {tvshows.map(tvshow => (
           <TvShowCard key={tvshow.id} tvshow={tvshow} />
         ))}
