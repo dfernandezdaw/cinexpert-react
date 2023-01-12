@@ -2,10 +2,7 @@ import React from 'react'
 import MovieCard from './MovieCard'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-
-// Define API key and base URL for API calls to The Movie Database
-const api_key = 'ee4c96fafb2b64ea5b91301d43342423'
-const BASE_URL = 'https://api.themoviedb.org/3'
+import { api_key, BASE_URL } from '../api'
 
 const MoviesGrid = () => {
   // Define state for movies
