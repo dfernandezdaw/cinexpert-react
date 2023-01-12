@@ -1,8 +1,8 @@
 import React from 'react'
 import MoviesGrid from '../components/MoviesGrid'
 
-const LandingPage = () => {
+const Home = () => {
   return <MoviesGrid />
 }
 
-export default LandingPage
+export default Home
