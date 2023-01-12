@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react'
 import { api_key, BASE_URL } from '../api'
 
 const TvShowDetails = () => {
-  const [tvshow, setTvShow] = useState([])
-  const [cast, setCast] = useState([])
+  const [tvshow, setTvShow] = useState(null)
+  const [cast, setCast] = useState(null)
   // Get the tvshow id from the url params
   const { tvshowId } = useParams()
   const api = axios.create({ baseURL: BASE_URL })
@@ -26,9 +26,9 @@ const TvShowDetails = () => {
       .catch(error => console.log(error))
   }, [])
 
-  const { original_name, poster_path, overview, created_by } = tvshow
+  if (!tvshow || !cast) return null
 
-  const { crew } = cast
+  const { original_name, poster_path, overview, created_by } = tvshow
 
   // Get the created by from tvshows array
   const createdBy =
@@ -41,10 +41,24 @@ const TvShowDetails = () => {
       <main>
         <h1>{original_name}</h1>
         <div className='container-sinopsis'>
-          <img
-            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-            alt={original_name}
-          />
+          {poster_path ? (
+            <img
+              src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+              alt={original_name}
+            />
+          ) : (
+            <svg
+              id='glyphicons-basic'
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 32 32'
+            >
+              <path
+                fill='#b5b5b5'
+                id='picture'
+                d='M27.5,5H4.5A1.50008,1.50008,0,0,0,3,6.5v19A1.50008,1.50008,0,0,0,4.5,27h23A1.50008,1.50008,0,0,0,29,25.5V6.5A1.50008,1.50008,0,0,0,27.5,5ZM26,18.5l-4.79425-5.2301a.99383.99383,0,0,0-1.44428-.03137l-5.34741,5.34741L19.82812,24H17l-4.79291-4.793a1.00022,1.00022,0,0,0-1.41418,0L6,24V8H26Zm-17.9-6a2.4,2.4,0,1,1,2.4,2.4A2.40005,2.40005,0,0,1,8.1,12.5Z'
+              />
+            </svg>
+          )}
           <div className='info'>
             <h2>Created by</h2>
             <span>{createdBy}</span>
