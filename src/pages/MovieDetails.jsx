@@ -3,11 +3,15 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { api_key, BASE_URL } from '../api'
+import Spinner from '../components/Spinner'
 
 const MovieDetails = () => {
   // Define state for movie and cast
   const [movie, setMovie] = useState(null)
   const [cast, setCast] = useState(null)
+
+  // Define state for loading
+  const [loading, setLoading] = useState(true)
 
   // Get the movie id from the URL params using the useParams hook from react-router-dom. The movieId is defined in the path of the route in router/index.jsx
   const { movieId } = useParams()
@@ -21,17 +25,23 @@ const MovieDetails = () => {
 
   // Call the functions to get the movie and cast and set the state with the response
   useEffect(() => {
+    setLoading(true)
     getMovie
-      .then(response => setMovie(response.data))
+      .then(response => {
+        setMovie(response.data)
+      })
       .catch(error => console.log(error))
 
     getCast
-      .then(response => setCast(response.data))
+      .then(response => {
+        setCast(response.data)
+        setLoading(false)
+      })
       .catch(error => console.log(error))
   }, [movieId])
 
-  // If the movie or cast state is null, return null. This will prevent the app from crashing while the data is being fetched on first render
-  if (!movie || !cast) return null
+  // If the loading state is true, return a loading spinner
+  if (loading) return <Spinner />
 
   // Destructure the movie object to get the properties we need
   const { original_title, poster_path, overview } = movie

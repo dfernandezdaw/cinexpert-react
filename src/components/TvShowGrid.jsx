@@ -3,10 +3,13 @@ import TvShowCard from './TvShowCard'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { api_key, BASE_URL } from '../api'
+import Spinner from '../components/Spinner'
 
 const TvShowGrid = () => {
   // Define state for tvshows
   const [tvshows, setTvShows] = useState([])
+  // Define state for loading
+  const [loading, setLoading] = useState(true)
 
   // Create an instance of axios with the base URL
   const api = axios.create({ baseURL: BASE_URL })
@@ -16,11 +19,18 @@ const TvShowGrid = () => {
 
   // Call the function to get the popular tvshows and set the state with the response
   useEffect(() => {
+    setLoading(true)
     getTvShows
       // Axios return an object response and our json is in data property
-      .then(response => setTvShows(response.data.results))
+      .then(response => {
+        setTvShows(response.data.results)
+        setLoading(false)
+      })
       .catch(error => console.log(error))
   }, [])
+
+  // If the loading state is true, return a loading spinner
+  if (loading) return <Spinner />
 
   return (
     <div>

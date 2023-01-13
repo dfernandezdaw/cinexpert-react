@@ -3,10 +3,15 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { api_key, BASE_URL } from '../api'
+import Spinner from '../components/Spinner'
 
 const TvShowDetails = () => {
   const [tvshow, setTvShow] = useState(null)
   const [cast, setCast] = useState(null)
+
+  // Define state for loading
+  const [loading, setLoading] = useState(true)
+
   // Get the tvshow id from the url params
   const { tvshowId } = useParams()
   const api = axios.create({ baseURL: BASE_URL })
@@ -17,16 +22,20 @@ const TvShowDetails = () => {
   })
 
   useEffect(() => {
+    setLoading(true)
     getTvShow
       .then(response => setTvShow(response.data))
       .catch(error => console.log(error))
 
     getCast
-      .then(response => setCast(response.data))
+      .then(response => {
+        setCast(response.data)
+        setLoading(false)
+      })
       .catch(error => console.log(error))
   }, [])
 
-  if (!tvshow || !cast) return null
+  if (loading) return <Spinner />
 
   const { original_name, poster_path, overview, created_by } = tvshow
 
