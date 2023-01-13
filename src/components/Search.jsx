@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './Search.module.css'
 import { FaSearch } from 'react-icons/fa'
 import { useSearchParams } from 'react-router-dom'
@@ -6,6 +6,12 @@ import { useSearchParams } from 'react-router-dom'
 const Search = () => {
   const [query, setQuery] = useSearchParams()
   const search = query.get('search')
+
+  const [searchValue, setSearchValue] = React.useState('')
+
+  useEffect(() => {
+    setSearchValue(search ?? '')
+  }, [search])
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -18,7 +24,7 @@ const Search = () => {
           type='text'
           value={search ?? ''}
           autoFocus
-          placeholder='Title'
+          placeholder='Search...'
           aria-label='Search Movies'
           onChange={e => {
             const value = e.target.value

@@ -5,7 +5,7 @@ import axios from 'axios'
 import { api_key, BASE_URL } from '../api'
 import Spinner from '../components/Spinner'
 
-const MoviesGrid = () => {
+const MoviesGrid = ({ search }) => {
   // Define state for movies
   const [movies, setMovies] = useState([])
   // Define state for loading
@@ -17,17 +17,28 @@ const MoviesGrid = () => {
   // Define a function to get the popular movies from the API using axios and the endpoint /movie/popular
   const getMovies = api.get('/movie/popular', { params: { api_key } })
 
+  const getSearch = api.get('/search/movie', {
+    params: { api_key, query: search },
+  })
+
   // Call the function to get the popular movies and set the state with the response
   useEffect(() => {
     setLoading(true)
-    getMovies
-      // Axios return an object response and our json is in data property
-      .then(response => {
-        setMovies(response.data.results)
-        setLoading(false)
-      })
-      .catch(error => console.log(error))
-  }, [])
+    search
+      ? getSearch
+          .then(response => {
+            setMovies(response.data.results)
+            setLoading(false)
+          })
+          .catch(error => console.log(error))
+      : getMovies
+          // Axios return an object response and our json is in data property
+          .then(response => {
+            setMovies(response.data.results)
+            setLoading(false)
+          })
+          .catch(error => console.log(error))
+  }, [search])
 
   // If the loading state is true, return a loading spinner
   if (loading) return <Spinner />
