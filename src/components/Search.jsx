@@ -9,6 +9,7 @@ const Search = () => {
 
   const [searchValue, setSearchValue] = React.useState('')
 
+  // Update the search query when the search value changes and set it to an empty string when the component unmounts
   useEffect(() => {
     setSearchValue(search ?? '')
   }, [search])

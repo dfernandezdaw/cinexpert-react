@@ -4,6 +4,7 @@ import Search from '../components/Search'
 import { useSearchParams, Link } from 'react-router-dom'
 
 const Home = () => {
+  // Get the search query from the URL and pass it to the MoviesGrid component
   const [query] = useSearchParams()
   const search = query.get('search')
   return (
