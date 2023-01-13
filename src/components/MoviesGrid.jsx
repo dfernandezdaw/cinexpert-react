@@ -33,14 +33,11 @@ const MoviesGrid = () => {
   if (loading) return <Spinner />
 
   return (
-    <div>
-      <h1>Movies</h1>
-      <div className='container-film'>
-        {/* Map over the movies array and render a MovieCard component for each movie */}
-        {movies.map(movie => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
-      </div>
+    <div className='container-film'>
+      {/* Map over the movies array and render a MovieCard component for each movie */}
+      {movies.map(movie => (
+        <MovieCard key={movie.id} movie={movie} />
+      ))}
     </div>
   )
 }
