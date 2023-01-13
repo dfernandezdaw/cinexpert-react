@@ -18,7 +18,9 @@ const MoviesGrid = ({ search }) => {
   const api = axios.create({ baseURL: BASE_URL })
 
   // Define a function to get the popular movies from the API using axios and the endpoint /movie/popular
-  const getMovies = api.get('/movie/popular', { params: { api_key } })
+  const getMovies = api.get('/movie/popular', {
+    params: { api_key, page: page },
+  })
 
   // Call the function to get the popular movies and set the state with the response
   useEffect(() => {
@@ -26,7 +28,7 @@ const MoviesGrid = ({ search }) => {
     search
       ? api
           .get('/search/movie', {
-            params: { api_key, query: search },
+            params: { api_key, query: search, page: page },
           })
           .then(response => {
             setMovies(response.data.results)

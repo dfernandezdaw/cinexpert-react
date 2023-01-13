@@ -9,7 +9,7 @@ const Search = () => {
 
   const [searchValue, setSearchValue] = React.useState('')
 
-  // Update the search query when the search value changes and set it to an empty string when the component unmounts
+  // Update the search query when the search value changes
   useEffect(() => {
     setSearchValue(search ?? '')
   }, [search])
@@ -29,7 +29,6 @@ const Search = () => {
           aria-label='Search Movies'
           onChange={e => {
             const value = e.target.value
-
             setQuery({ search: value })
           }}
         />
