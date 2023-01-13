@@ -117,6 +117,23 @@ nav {
   margin-left: 1.5rem;
 }
 
+// Load more button
+.button {
+  background-color: colors.$main-color;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  cursor: pointer;
+  font: bold 1.6rem/1.5;
+}
+
+.button-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 /*Main*/
 
 main {

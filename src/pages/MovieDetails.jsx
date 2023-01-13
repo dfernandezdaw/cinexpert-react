@@ -7,8 +7,8 @@ import Spinner from '../components/Spinner'
 
 const MovieDetails = () => {
   // Define state for movie and cast
-  const [movie, setMovie] = useState(null)
-  const [cast, setCast] = useState(null)
+  const [movie, setMovie] = useState([])
+  const [cast, setCast] = useState([])
 
   // Define state for loading
   const [loading, setLoading] = useState(true)
