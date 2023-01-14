@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { api_key, BASE_URL } from '../api'
 import Spinner from '../components/Spinner'
-import InfiniteScroll from 'react-infinite-scroll-component'
 
 const MoviesGrid = ({ search }) => {
   // Define state for movies
