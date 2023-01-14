@@ -54,8 +54,8 @@ const MoviesGrid = ({ search }) => {
     <div>
       <div className='container-film'>
         {/* Map over the movies array and render a MovieCard component for each movie */}
-        {movies.map(movie => (
-          <MovieCard key={movie.id} movie={movie} />
+        {movies.map((movie, index) => (
+          <MovieCard key={index} movie={movie} />
         ))}
       </div>
       <div className='flex items-center justify-center mt-10'>
