@@ -5,6 +5,7 @@ import MovieDetails from '../pages/MovieDetails'
 import TvShowDetails from '../pages/TvShowDetails'
 import NotFound from '../pages/NotFound'
 import TvShows from '../pages/TvShows'
+import SearchPage from '../pages/SearchPage'
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: '/tvshow/:tvshowId',
         element: <TvShowDetails />,
+      },
+      {
+        path: '/search',
+        element: <SearchPage />,
       },
     ],
   },
