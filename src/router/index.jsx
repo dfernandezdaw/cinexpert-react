@@ -6,6 +6,7 @@ import TvShowDetails from '../pages/TvShowDetails'
 import NotFound from '../pages/NotFound'
 import TvShows from '../pages/TvShows'
 import SearchPage from '../pages/SearchPage'
+import Login from '../pages/Login'
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: '/search',
         element: <SearchPage />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
     ],
   },
