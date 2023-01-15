@@ -5,7 +5,7 @@ import axios from 'axios'
 import { api_key, BASE_URL } from '../api'
 import Spinner from '../components/Spinner'
 
-const MoviesGrid = ({ search }) => {
+const MoviesGrid = ({ search, watchlist }) => {
   // Define state for movies
   const [movies, setMovies] = useState([])
   // Define state for loading
@@ -30,6 +30,8 @@ const MoviesGrid = ({ search }) => {
           setMovies(prevstate => [...prevstate, ...response.data.results])
         })
         .catch(error => console.log(error))
+    } else if (watchlist) {
+      setMovies(watchlist)
     } else {
       axios
         .get(`${BASE_URL}/movie/popular`, {
@@ -58,15 +60,18 @@ const MoviesGrid = ({ search }) => {
         ))}
       </div>
       <div className='flex items-center justify-center mt-10'>
-        <div className='button-center'>
-          <button
-            className='button'
-            onClick={loadMore}
-            disabled={page > 15 ? true : false}
-          >
-            Load More
-          </button>
-        </div>
+        {/* if there is watchlist dont render the button */}
+        {watchlist ? null : (
+          <div className='button-center'>
+            <button
+              className='button'
+              onClick={loadMore}
+              disabled={page > 15 ? true : false}
+            >
+              Load More
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )

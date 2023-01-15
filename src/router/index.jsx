@@ -7,6 +7,7 @@ import NotFound from '../pages/NotFound'
 import TvShows from '../pages/TvShows'
 import SearchPage from '../pages/SearchPage'
 import Login from '../pages/Login'
+import Watchlist from '../pages/Watchlist'
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/watchlist',
+        element: <Watchlist />,
       },
     ],
   },

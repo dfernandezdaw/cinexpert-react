@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { api_key, BASE_URL } from '../api'
 import Spinner from '../components/Spinner'
+import { FaHeart, FaRegHeart } from 'react-icons/fa'
 
 const MovieDetails = () => {
   // Define state for movie and cast
@@ -40,6 +41,15 @@ const MovieDetails = () => {
       .catch(error => console.log(error))
   }, [movieId])
 
+  const [watchlist, setWatchlist] = useState(false)
+
+  // Check if the movie is in the watchlist and set the state to true or false
+  useEffect(() => {
+    const watchlist = JSON.parse(localStorage.getItem('watchlist')) || []
+    const isWatchlist = watchlist.find(item => item.id === movie.id)
+    isWatchlist ? setWatchlist(true) : setWatchlist(false)
+  }, [movie])
+
   // If the loading state is true, return a loading spinner
   if (loading) return <Spinner />
 
@@ -51,6 +61,23 @@ const MovieDetails = () => {
   const director = crew && crew.find(crew => crew.job === 'Director').name
   // Get the cast names from the cast array and join them with a comma
   const castList = cast.cast && cast.cast.map(cast => cast.name).join(', ')
+
+  // Handle the watchlist button to add or remove the movie from the watchlist
+  const handleWatchlist = () => {
+    // Get the watchlist from local storage
+    const watchlist = JSON.parse(localStorage.getItem('watchlist')) || []
+    // Check if the movie is in the watchlist
+    const isWatchlist = watchlist.find(item => item.id === movie.id)
+    if (isWatchlist) {
+      const newWatchlist = watchlist.filter(item => item.id !== movie.id)
+      localStorage.setItem('watchlist', JSON.stringify(newWatchlist))
+      setWatchlist(false)
+    } else {
+      watchlist.push(movie)
+      localStorage.setItem('watchlist', JSON.stringify(watchlist))
+      setWatchlist(true)
+    }
+  }
 
   return (
     <div>
@@ -82,6 +109,20 @@ const MovieDetails = () => {
             <span>{overview}</span>
             <h2>Cast</h2>
             <span>{castList}</span>
+            {
+              // If the movie is in the watchlist of localStorage, show the remove button, otherwise show the add button
+            }
+            <div className='button-center'>
+              {watchlist ? (
+                <button className='button' onClick={handleWatchlist}>
+                  <FaHeart /> Remove from watchlist
+                </button>
+              ) : (
+                <button className='button' onClick={handleWatchlist}>
+                  <FaRegHeart /> Add to watchlist
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </main>
