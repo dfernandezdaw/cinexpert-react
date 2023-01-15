@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { api_key, BASE_URL } from '../api'
 import Spinner from '../components/Spinner'
-import { FaHeart, FaRegHeart } from 'react-icons/fa'
+import { FaHeart, FaRegHeart, FaStar } from 'react-icons/fa'
 
 const MovieDetails = () => {
   // Define state for movie and cast
@@ -103,6 +103,14 @@ const MovieDetails = () => {
             </svg>
           )}
           <div className='info'>
+            <span>
+              <FaStar style={{ marginRight: '0.5rem' }} />
+              {movie.vote_average.toFixed(1)}
+            </span>
+            <span style={{ marginLeft: '2rem' }}>
+              Released: {movie.release_date}
+            </span>
+            <span style={{ marginLeft: '2rem' }}>{movie.runtime} min</span>
             <h2>Director</h2>
             <span>{director}</span>
             <h2>Storyline</h2>
