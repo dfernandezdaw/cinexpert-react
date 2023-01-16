@@ -105,7 +105,7 @@ const MovieDetails = () => {
           <div className='info'>
             <span>
               <FaStar style={{ marginRight: '0.5rem' }} />
-              {movie.vote_average.toFixed(1)}
+              {movie.vote_average}
             </span>
             <span style={{ marginLeft: '2rem' }}>
               Released: {movie.release_date}
