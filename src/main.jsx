@@ -4,9 +4,12 @@ import './index.css'
 import './assets/styles/style.scss' // Importing SCSS file
 import { RouterProvider } from 'react-router-dom'
 import { router } from './router'
+import UserProvider from './context/UserContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>
 )

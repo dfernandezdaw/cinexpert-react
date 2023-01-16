@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+//import Swal from 'sweetalert2'
+import { useUserContext } from '../context/UserContext'
 import { useForm } from 'react-hook-form'
 
 const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const dataInitialState = {
+    email: '',
+    password: '',
+  }
+  const { user, setUser } = useUserContext()
+  const [users, setUsers] = useState([])
+  const [data, setData] = useState(dataInitialState)
+  const [error, setError] = useState(null)
+  const [esregistro, setEsregistro] = useState(false)
+
+  const navigate = useNavigate()
 
   const {
     register,
@@ -13,9 +23,9 @@ const Login = () => {
     handleSubmit,
   } = useForm()
 
-  const navigate = useNavigate()
+  const onSubmit = e => {
+    const { email, password } = data
 
-  const onSubmit = () => {
     const userEmail = localStorage.getItem('email')
     const userPassword = localStorage.getItem('password')
 
@@ -23,10 +33,41 @@ const Login = () => {
       window.alert(
         "You are logged in. Unfortunatelly, we don't have a backend yet."
       )
+      login()
       navigate('/')
     } else {
       window.alert('Wrong email or password')
     }
+  }
+
+  const registrar = async () => {
+    console.log('Registrando...')
+    Swal.fire({
+      title: 'Éxito',
+      text: 'Usuario registrado',
+      icon: 'success',
+    })
+    setUsers([...users, data])
+    setData(dataInitialState)
+    setError(null)
+    setUser(true)
+    navigate('/watchlist')
+  }
+
+  const login = async () => {
+    console.log('Logueando...')
+    // Validamos el user
+    setUser(true)
+    setData(dataInitialState)
+    setError(null)
+    navigate('/watchlist')
+  }
+
+  const handleChange = e => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    })
   }
 
   return (
@@ -46,7 +87,8 @@ const Login = () => {
           name='email'
           id='email'
           placeholder='Email Adress...'
-          onChange={e => setEmail(e.target.value)}
+          onChange={e => handleChange(e)}
+          value={data.email}
         />
         {errors.email?.type === 'required' && (
           <small className='error'>Email is required</small>
@@ -66,8 +108,9 @@ const Login = () => {
           })}
           name='password'
           id='password'
-          placeholder='Password...'
-          onChange={e => setPassword(e.target.value)}
+          placeholder='password...'
+          onChange={e => handleChange(e)}
+          value={data.password}
         />
         {errors.password?.type === 'required' && (
           <small className='error'>Password is required</small>

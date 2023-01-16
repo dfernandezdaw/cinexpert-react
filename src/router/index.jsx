@@ -9,6 +9,7 @@ import SearchPage from '../pages/SearchPage'
 import Login from '../pages/Login'
 import Watchlist from '../pages/Watchlist'
 import Signup from '../pages/Signup'
+import LayoutPrivate from '../layouts/LayoutPrivate'
 
 export const router = createBrowserRouter([
   {
@@ -25,18 +26,6 @@ export const router = createBrowserRouter([
         element: <MovieDetails />,
       },
       {
-        path: '/tvshows',
-        element: <TvShows />,
-      },
-      {
-        path: '/tvshow/:tvshowId',
-        element: <TvShowDetails />,
-      },
-      {
-        path: '/search',
-        element: <SearchPage />,
-      },
-      {
         path: '/login',
         element: <Login />,
       },
@@ -45,8 +34,18 @@ export const router = createBrowserRouter([
         element: <Signup />,
       },
       {
+        path: '/search',
+        element: <SearchPage />,
+      },
+      {
         path: '/watchlist',
-        element: <Watchlist />,
+        element: <LayoutPrivate />,
+        children: [
+          {
+            index: true,
+            element: <Watchlist />,
+          },
+        ],
       },
     ],
   },

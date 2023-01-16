@@ -1,8 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/img/logo.png'
+import { useUserContext } from '../context/UserContext'
 
 const Header = () => {
+  const { user, setUser } = useUserContext()
+
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    setUser(null)
+    navigate('/')
+  }
+
   return (
     <header>
       <nav className='navBar'>
@@ -15,12 +25,26 @@ const Header = () => {
           <Link to='/watchlist'>Watchlist</Link>
         </div>
         <div className='container-login'>
-          <Link id='dark-select' to='/login'>
-            Log in
-          </Link>
-          <Link id='dark-select-2' to='/signup'>
-            Sign up
-          </Link>
+          {user && (
+            <Link id='dark-select' to='/login'>
+              Profile
+            </Link>
+          )}
+          {user && (
+            <Link id='dark-select-2' onClick={handleLogout}>
+              Log out
+            </Link>
+          )}
+          {!user && (
+            <Link id='dark-select' to='/login'>
+              Log in
+            </Link>
+          )}
+          {!user && (
+            <Link id='dark-select-2' to='/signup'>
+              Sign up
+            </Link>
+          )}
         </div>
         <ul>
           <li>

@@ -68,6 +68,7 @@ const MovieDetails = () => {
     const watchlist = JSON.parse(localStorage.getItem('watchlist')) || []
     // Check if the movie is in the watchlist
     const isWatchlist = watchlist.find(item => item.id === movie.id)
+    // If the movie is in the watchlist, remove it from the watchlist and set the state to false
     if (isWatchlist) {
       const newWatchlist = watchlist.filter(item => item.id !== movie.id)
       localStorage.setItem('watchlist', JSON.stringify(newWatchlist))
