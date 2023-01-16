@@ -135,6 +135,13 @@ nav {
   margin-bottom: 2rem;
 }
 
+/* Form error */
+.error {
+  color: red;
+  font-size: 1.4rem;
+  margin-top: 1rem;
+}
+
 /*Main*/
 
 main {
@@ -242,7 +249,7 @@ footer a:hover {
   border: 2px solid colors.$main-color;
   border-radius: 1.5rem;
   width: 40rem;
-  height: 37rem;
+  height: 40rem;
   margin: 0 auto;
   position: relative;
   top: 18.2rem;
