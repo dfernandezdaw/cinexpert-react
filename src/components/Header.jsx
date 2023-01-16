@@ -12,7 +12,7 @@ const Header = () => {
         <a className='icon'>&#9776;</a>
         <div className='container-links'>
           <Link to='/'>Movies</Link>
-          <Link to='/tvshows'>TV Shows</Link>
+          <Link to='/watchlist'>Watchlist</Link>
         </div>
         <div className='container-login'>
           <Link id='dark-select' to='/login'>
@@ -29,8 +29,8 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link className='nav-link' to='/tvshows'>
-              TV Shows
+            <Link className='nav-link' to='/watchlist'>
+              Watchlist
             </Link>
           </li>
           <li>
