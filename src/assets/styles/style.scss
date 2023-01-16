@@ -317,7 +317,7 @@ footer a:hover {
   border: 2px solid colors.$main-color;
   border-radius: 1.5rem;
   width: 45rem;
-  height: 55rem;
+  height: 58rem;
   margin: 0 auto;
   position: relative;
   top: 10rem;
@@ -373,10 +373,6 @@ footer a:hover {
   input {
     &[type='checkbox'] {
       display: initial;
-    }
-
-    &[name='confpassword'] {
-      margin-bottom: 2rem;
     }
   }
 
