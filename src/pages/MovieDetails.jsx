@@ -5,6 +5,9 @@ import { useEffect, useState } from 'react'
 import { api_key, BASE_URL } from '../api'
 import Spinner from '../components/Spinner'
 import { FaHeart, FaRegHeart, FaStar } from 'react-icons/fa'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useUserContext } from '../context/UserContext'
 
 const MovieDetails = () => {
   // Define state for movie and cast
@@ -13,6 +16,9 @@ const MovieDetails = () => {
 
   // Define state for loading
   const [loading, setLoading] = useState(true)
+
+  // Usercontext
+  const { user, setUser } = useUserContext()
 
   // Get the movie id from the URL params using the useParams hook from react-router-dom. The movieId is defined in the path of the route in router/index.jsx
   const { movieId } = useParams()
@@ -50,6 +56,17 @@ const MovieDetails = () => {
     isWatchlist ? setWatchlist(true) : setWatchlist(false)
   }, [movie])
 
+  // Timer event to show a toast message if the user is not logged in
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (user) return
+      toast('Login to add new movies to the watchlist!', {
+        position: 'top-center',
+      })
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [])
+
   // If the loading state is true, return a loading spinner
   if (loading) return <Spinner />
 
@@ -82,6 +99,7 @@ const MovieDetails = () => {
 
   return (
     <div>
+      <ToastContainer limit={1} />
       <main>
         <h1>{original_title}</h1>
         <div className='container-sinopsis'>
@@ -121,17 +139,19 @@ const MovieDetails = () => {
             {
               // If the movie is in the watchlist of localStorage, show the remove button, otherwise show the add button
             }
-            <div className='button-center'>
-              {watchlist ? (
-                <button className='button' onClick={handleWatchlist}>
-                  <FaHeart /> Remove from watchlist
-                </button>
-              ) : (
-                <button className='button' onClick={handleWatchlist}>
-                  <FaRegHeart /> Add to watchlist
-                </button>
-              )}
-            </div>
+            {user && (
+              <div className='button-center'>
+                {watchlist ? (
+                  <button className='button' onClick={handleWatchlist}>
+                    <FaHeart /> Remove from watchlist
+                  </button>
+                ) : (
+                  <button className='button' onClick={handleWatchlist}>
+                    <FaRegHeart /> Add to watchlist
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </main>
