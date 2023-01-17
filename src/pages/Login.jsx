@@ -51,8 +51,6 @@ const Login = () => {
   }
 
   const login = async () => {
-    console.log('Logueando...')
-    // Validamos el user
     setUser(true)
     setData(dataInitialState)
     setError(null)
