@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+// Component to display the 404 page
+
 const NotFound = () => {
   return (
     <div className='body404'>

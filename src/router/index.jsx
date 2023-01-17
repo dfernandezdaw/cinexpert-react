@@ -11,6 +11,8 @@ import LayoutPrivate from '../layouts/LayoutPrivate'
 import Profile from '../pages/Profile'
 import Contact from '../pages/Contact'
 
+// Router configuration
+
 export const router = createBrowserRouter([
   {
     path: '/',

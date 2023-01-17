@@ -1,3 +1,4 @@
+/* SearchBar styles added as module. All components style should be this way */
 .searchContainer {
   display: flex;
   justify-content: center;

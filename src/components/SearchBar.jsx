@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import styles from './SearchBar.module.css'
 
+// Component to display a search bar with a search button
+
 const SearchBar = () => {
   const [search, setSearch] = React.useState('')
   const navigate = useNavigate()
 
+  // Function to handle the search form submission and navigate to the search page
   const handleSubmit = e => {
     e.preventDefault()
     if (!search) return

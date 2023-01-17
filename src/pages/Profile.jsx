@@ -3,6 +3,8 @@ import { RxAvatar } from 'react-icons/rx'
 import { useForm } from 'react-hook-form'
 import { toast, ToastContainer } from 'react-toastify'
 
+// Component to display the profile page with a form to update the user profile. This component uses the react-toastify library and the react-hook-form library for validations
+
 const Profile = () => {
   const {
     register,

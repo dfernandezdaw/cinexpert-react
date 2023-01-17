@@ -4,6 +4,8 @@ import { RxAvatar } from 'react-icons/rx'
 import { useForm } from 'react-hook-form'
 import { toast, ToastContainer } from 'react-toastify'
 
+// Component to display the contact page with a form to send a message to the support. This component uses the react-toastify library and the react-hook-form library for validation
+
 const Contact = () => {
   const {
     register,

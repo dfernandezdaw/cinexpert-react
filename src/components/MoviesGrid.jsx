@@ -5,6 +5,8 @@ import axios from 'axios'
 import { api_key, BASE_URL } from '../api'
 import Spinner from '../components/Spinner'
 
+// Primary component of the app. It fetches the movies from the API and displays them in a grid
+
 const MoviesGrid = ({ search, watchlist }) => {
   // Define state for movies
   const [movies, setMovies] = useState([])
@@ -24,13 +26,14 @@ const MoviesGrid = ({ search, watchlist }) => {
   // Show spinner while loading
   if (loading) return <Spinner />
 
-  // Define a function to get the popular movies from the API using axios and the endpoint /movie/popular
+  // Fetch movies when page, search, genre, release date, sort by or filter changes
   useEffect(() => {
     setLoading(true)
     fetchData(page)
     setLoading(false)
   }, [page, search, genre, releaseDate, sortBy, filter])
 
+  // Fetch movies from API using axios
   const fetchData = useCallback(
     async page => {
       if (search) {
@@ -103,6 +106,7 @@ const MoviesGrid = ({ search, watchlist }) => {
     [search, watchlist, genre, releaseDate, sortBy, filter]
   )
 
+  // Load more movies when user scrolls to the bottom of the page, click the button and there are more movies to load
   const loadMore = () => {
     setPage(prevstate => prevstate + 1)
   }

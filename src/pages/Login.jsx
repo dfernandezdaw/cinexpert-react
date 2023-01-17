@@ -6,6 +6,8 @@ import { AiOutlineMail, AiOutlineUnlock } from 'react-icons/ai'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+// Component to display the login form and handle the login process with the user data stored in the localStorage (email and password)
+
 const Login = () => {
   const dataInitialState = {
     email: '',
@@ -15,7 +17,6 @@ const Login = () => {
   const [users, setUsers] = useState([])
   const [data, setData] = useState(dataInitialState)
   const [error, setError] = useState(null)
-  const [esregistro, setEsregistro] = useState(false)
 
   const navigate = useNavigate()
 

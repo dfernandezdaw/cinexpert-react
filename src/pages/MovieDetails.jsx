@@ -9,6 +9,8 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useUserContext } from '../context/UserContext'
 
+// Component to display the movie details page and handle the add to watchlist process
+
 const MovieDetails = () => {
   // Define state for movie and cast
   const [movie, setMovie] = useState([])
@@ -89,11 +91,13 @@ const MovieDetails = () => {
     const isWatchlist = watchlist.find(item => item.id === movie.id)
     // If the movie is in the watchlist, remove it from the watchlist and update the local storage
     if (isWatchlist) {
+      // Filter the all the movies in the watchlist except the one we want to remove and save it in a new array called newWatchlist
       const newWatchlist = watchlist.filter(item => item.id !== movie.id)
       // Update the local storage
       localStorage.setItem('watchlist', JSON.stringify(newWatchlist))
       setWatchlist(false)
     } else {
+      // If the movie is not in the watchlist, add it to the watchlist and update the local storage
       watchlist.push(movie)
       localStorage.setItem('watchlist', JSON.stringify(watchlist))
       setWatchlist(true)

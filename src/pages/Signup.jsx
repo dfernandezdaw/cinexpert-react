@@ -5,6 +5,8 @@ import { AiOutlineMail, AiOutlineUnlock } from 'react-icons/ai'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+// Component to display the signup form and handle the signup process with the user data stored in the localStorage (email and password)
+
 const Signup = () => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')

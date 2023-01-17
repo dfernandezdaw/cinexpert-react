@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { api_key, BASE_URL } from '../api'
 
+// Component to display the search page with the search value and the movies grid
+
 const SearchPage = () => {
   const api = axios.create({ baseURL: BASE_URL })
 
