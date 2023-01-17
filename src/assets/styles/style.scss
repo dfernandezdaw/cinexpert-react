@@ -142,6 +142,28 @@ nav {
   margin-top: 1rem;
 }
 
+/* Select container */
+.select-container {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.select {
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  border: 1px solid colors.$main-color;
+  &:focus {
+    outline: none;
+    border: 1px solid #fec09a;
+    box-shadow: 0 0 5px #ebbed4;
+  }
+}
+
 /*Main*/
 
 main {

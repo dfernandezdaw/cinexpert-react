@@ -51,7 +51,9 @@ const MovieDetails = () => {
 
   // Check if the movie is in the watchlist and set the state to true or false
   useEffect(() => {
+    // Get the watchlist from local storage
     const watchlist = JSON.parse(localStorage.getItem('watchlist')) || []
+    // Check if the movie is in the watchlist
     const isWatchlist = watchlist.find(item => item.id === movie.id)
     isWatchlist ? setWatchlist(true) : setWatchlist(false)
   }, [movie])
@@ -85,9 +87,10 @@ const MovieDetails = () => {
     const watchlist = JSON.parse(localStorage.getItem('watchlist')) || []
     // Check if the movie is in the watchlist
     const isWatchlist = watchlist.find(item => item.id === movie.id)
-    // If the movie is in the watchlist, remove it from the watchlist and set the state to false
+    // If the movie is in the watchlist, remove it from the watchlist and update the local storage
     if (isWatchlist) {
       const newWatchlist = watchlist.filter(item => item.id !== movie.id)
+      // Update the local storage
       localStorage.setItem('watchlist', JSON.stringify(newWatchlist))
       setWatchlist(false)
     } else {
