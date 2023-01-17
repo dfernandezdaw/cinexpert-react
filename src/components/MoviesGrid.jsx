@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import MovieCard from './MovieCard'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -31,74 +31,77 @@ const MoviesGrid = ({ search, watchlist }) => {
     setLoading(false)
   }, [page, search, genre, releaseDate, sortBy, filter])
 
-  const fetchData = async page => {
-    if (search) {
-      await axios
-        .get(`${BASE_URL}/search/movie`, {
-          params: { api_key, query: search, page: page },
-        })
-        .then(response => {
-          setMovies(prevstate => [...prevstate, ...response.data.results])
-        })
-        .catch(error => console.log(error))
-    } else if (watchlist) {
-      setMovies(watchlist)
-    } else if (genre) {
-      await axios
-        .get(`${BASE_URL}/discover/movie`, {
-          params: { api_key, with_genres: genre, page: page },
-        })
-        .then(response => {
-          setMovies(prevstate => [...prevstate, ...response.data.results])
-        })
-        .catch(error => console.log(error))
-    } else if (releaseDate) {
-      await axios
-        .get(`${BASE_URL}/discover/movie`, {
-          params: { api_key, primary_release_year: releaseDate, page: page },
-        })
-        .then(response => {
-          setMovies(prevstate => [...prevstate, ...response.data.results])
-        })
-        .catch(error => console.log(error))
-    } else if (sortBy) {
-      await axios
-        .get(`${BASE_URL}/discover/movie`, {
-          params: { api_key, sort_by: sortBy, page: page },
-        })
-        .then(response => {
-          setMovies(prevstate => [...prevstate, ...response.data.results])
-        })
-        .catch(error => console.log(error))
-    } else if (filter === 'upcoming') {
-      await axios
-        .get(`${BASE_URL}/movie/upcoming`, {
-          params: { api_key, page: page },
-        })
-        .then(response => {
-          setMovies(prevstate => [...prevstate, ...response.data.results])
-        })
-        .catch(error => console.log(error))
-    } else if (filter === 'top_rated') {
-      await axios
-        .get(`${BASE_URL}/movie/top_rated`, {
-          params: { api_key, page: page },
-        })
-        .then(response => {
-          setMovies(prevstate => [...prevstate, ...response.data.results])
-        })
-        .catch(error => console.log(error))
-    } else {
-      await axios
-        .get(`${BASE_URL}/movie/popular`, {
-          params: { api_key, page: page },
-        })
-        .then(response => {
-          setMovies(prevstate => [...prevstate, ...response.data.results])
-        })
-        .catch(error => console.log(error))
-    }
-  }
+  const fetchData = useCallback(
+    async page => {
+      if (search) {
+        await axios
+          .get(`${BASE_URL}/search/movie`, {
+            params: { api_key, query: search, page: page },
+          })
+          .then(response => {
+            setMovies(prevstate => [...prevstate, ...response.data.results])
+          })
+          .catch(error => console.log(error))
+      } else if (watchlist) {
+        setMovies(watchlist)
+      } else if (genre) {
+        await axios
+          .get(`${BASE_URL}/discover/movie`, {
+            params: { api_key, with_genres: genre, page: page },
+          })
+          .then(response => {
+            setMovies(prevstate => [...prevstate, ...response.data.results])
+          })
+          .catch(error => console.log(error))
+      } else if (releaseDate) {
+        await axios
+          .get(`${BASE_URL}/discover/movie`, {
+            params: { api_key, primary_release_year: releaseDate, page: page },
+          })
+          .then(response => {
+            setMovies(prevstate => [...prevstate, ...response.data.results])
+          })
+          .catch(error => console.log(error))
+      } else if (sortBy) {
+        await axios
+          .get(`${BASE_URL}/discover/movie`, {
+            params: { api_key, sort_by: sortBy, page: page },
+          })
+          .then(response => {
+            setMovies(prevstate => [...prevstate, ...response.data.results])
+          })
+          .catch(error => console.log(error))
+      } else if (filter === 'upcoming') {
+        await axios
+          .get(`${BASE_URL}/movie/upcoming`, {
+            params: { api_key, page: page },
+          })
+          .then(response => {
+            setMovies(prevstate => [...prevstate, ...response.data.results])
+          })
+          .catch(error => console.log(error))
+      } else if (filter === 'top_rated') {
+        await axios
+          .get(`${BASE_URL}/movie/top_rated`, {
+            params: { api_key, page: page },
+          })
+          .then(response => {
+            setMovies(prevstate => [...prevstate, ...response.data.results])
+          })
+          .catch(error => console.log(error))
+      } else {
+        await axios
+          .get(`${BASE_URL}/movie/popular`, {
+            params: { api_key, page: page },
+          })
+          .then(response => {
+            setMovies(prevstate => [...prevstate, ...response.data.results])
+          })
+          .catch(error => console.log(error))
+      }
+    },
+    [search, watchlist, genre, releaseDate, sortBy, filter]
+  )
 
   const loadMore = () => {
     setPage(prevstate => prevstate + 1)
