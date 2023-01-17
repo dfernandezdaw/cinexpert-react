@@ -74,7 +74,7 @@ const Login = () => {
             <span className='iconify-inline' data-icon='carbon:email'>
               <AiOutlineMail />
             </span>
-            Email Adress
+            Email Address
           </label>
           <input
             type='text'
@@ -84,7 +84,7 @@ const Login = () => {
             })}
             name='email'
             id='email'
-            placeholder='Email Adress...'
+            placeholder='Email Address...'
             onChange={e => handleChange(e)}
             value={data.email}
           />

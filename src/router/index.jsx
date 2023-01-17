@@ -2,15 +2,14 @@ import { createBrowserRouter } from 'react-router-dom'
 import LayoutPublic from '../layouts/LayoutPublic'
 import Home from '../pages/Home'
 import MovieDetails from '../pages/MovieDetails'
-import TvShowDetails from '../pages/TvShowDetails'
 import NotFound from '../pages/NotFound'
-import TvShows from '../pages/TvShows'
 import SearchPage from '../pages/SearchPage'
 import Login from '../pages/Login'
 import Watchlist from '../pages/Watchlist'
 import Signup from '../pages/Signup'
 import LayoutPrivate from '../layouts/LayoutPrivate'
 import Profile from '../pages/Profile'
+import Contact from '../pages/Contact'
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +44,16 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <Profile />,
+          },
+        ],
+      },
+      {
+        path: '/contact',
+        element: <LayoutPrivate />,
+        children: [
+          {
+            index: true,
+            element: <Contact />,
           },
         ],
       },

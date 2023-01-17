@@ -23,6 +23,7 @@ const Header = () => {
         <div className='container-links'>
           <Link to='/'>Movies</Link>
           <Link to='/watchlist'>Watchlist</Link>
+          {user && <Link to='/contact'>Contact</Link>}
         </div>
         <div className='container-login'>
           {user && (
