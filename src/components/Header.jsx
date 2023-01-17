@@ -26,7 +26,7 @@ const Header = () => {
         </div>
         <div className='container-login'>
           {user && (
-            <Link id='dark-select' to='/login'>
+            <Link id='dark-select' to='/profile'>
               Profile
             </Link>
           )}

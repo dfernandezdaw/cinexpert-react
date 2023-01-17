@@ -10,6 +10,7 @@ import Login from '../pages/Login'
 import Watchlist from '../pages/Watchlist'
 import Signup from '../pages/Signup'
 import LayoutPrivate from '../layouts/LayoutPrivate'
+import Profile from '../pages/Profile'
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,16 @@ export const router = createBrowserRouter([
       {
         path: '/search',
         element: <SearchPage />,
+      },
+      {
+        path: '/profile',
+        element: <LayoutPrivate />,
+        children: [
+          {
+            index: true,
+            element: <Profile />,
+          },
+        ],
       },
       {
         path: '/watchlist',
